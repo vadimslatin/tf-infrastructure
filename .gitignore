@@ -1,4 +1,3 @@
-cat > .gitignore << 'EOF'
 .terraform/
 *.tfstate
 *.tfstate.backup
@@ -6,4 +5,4 @@ cat > .gitignore << 'EOF'
 !terraform.tfvars.example
 .terraform.lock.hcl
 crash.log
-EOF
+*.pem

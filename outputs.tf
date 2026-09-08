@@ -20,10 +20,10 @@ output "pinned_ami_id" {
 
 output "latest_available_ami_id" {
   description = "Latest matching AMI available from Canonical (for comparison — update var.ami_id manually if outdated)"
-  value       = data.aws_ami.ubuntu_latest.id
+  value       = data.aws_ami.ubuntu.id
 }
 
 output "ami_is_outdated" {
   description = "True if a newer AMI is available than the one currently pinned"
-  value       = var.ami_id != data.aws_ami.ubuntu_latest.id
+  value       = var.ami_id != data.aws_ami.ubuntu.id
 }
