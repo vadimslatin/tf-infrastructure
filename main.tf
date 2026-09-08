@@ -1,20 +1,3 @@
-# Получаем свежий Amazon Linux 2023 AMI автоматически (без хардкода ID)
-data "aws_ami" "amazon_linux" {
-  most_recent = true
-  owners      = ["amazon"]
-
-  filter {
-    name   = "name"
-    values = ["al2023-ami-*-x86_64"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-}
-
-# Security Group - разрешаем SSH и HTTP для практики
 resource "aws_security_group" "practice_sg" {
   name        = "${var.project_name}-sg"
   description = "Allow SSH and HTTP for practice instance"
@@ -50,25 +33,24 @@ resource "aws_security_group" "practice_sg" {
 }
 
 resource "aws_instance" "practice_ec2" {
-  ami                    = data.aws_ami.amazon_linux.id
+  ami                    = var.ami_id
   instance_type          = var.instance_type
   key_name               = var.key_pair_name
   vpc_security_group_ids = [aws_security_group.practice_sg.id]
 
-  # Free tier: до 30 GB gp2/gp3 EBS бесплатно
   root_block_device {
     volume_size = 8
     volume_type = "gp3"
   }
 
-  # Простой user_data для проверки - поднимет nginx
-  user_data = <<-EOF
+  user_data = <<-EOT
               #!/bin/bash
-              dnf install -y nginx
+              apt-get update -y
+              apt-get install -y nginx
               systemctl enable nginx
               systemctl start nginx
-              echo "Hello from Terraform practice instance" > /usr/share/nginx/html/index.html
-              EOF
+              echo "Hello from Terraform practice instance" > /var/www/html/index.html
+              EOT
 
   tags = {
     Name    = "${var.project_name}-instance"

@@ -7,7 +7,12 @@ variable "aws_region" {
 variable "instance_type" {
   description = "EC2 instance type (must stay free-tier eligible)"
   type        = string
-  default     = "t2.micro" # или t3.micro, зависит от региона
+  default     = "t2.micro"
+}
+
+variable "ami_id" {
+  description = "Explicit AMI ID for the EC2 instance. Update deliberately via PR after verifying new AMI (see data.tf for lookup helper)."
+  type        = string
 }
 
 variable "key_pair_name" {
@@ -18,7 +23,7 @@ variable "key_pair_name" {
 variable "allowed_ssh_cidr" {
   description = "CIDR block allowed to SSH into the instance"
   type        = string
-  default     = "0.0.0.0/0" # ⚠️ для практики ок, в реальности - ограничить своим IP
+  default     = "0.0.0.0/0"
 }
 
 variable "project_name" {

@@ -10,5 +10,20 @@ output "public_ip" {
 
 output "ssh_connection_command" {
   description = "Command to SSH into the instance"
-  value       = "ssh -i <path-to-your-key>.pem ec2-user@${aws_instance.practice_ec2.public_ip}"
+  value       = "ssh -i <path-to-your-key>.pem ubuntu@${aws_instance.practice_ec2.public_ip}"
+}
+
+output "pinned_ami_id" {
+  description = "AMI ID currently pinned in var.ami_id"
+  value       = var.ami_id
+}
+
+output "latest_available_ami_id" {
+  description = "Latest matching AMI available from Canonical (for comparison — update var.ami_id manually if outdated)"
+  value       = data.aws_ami.ubuntu_latest.id
+}
+
+output "ami_is_outdated" {
+  description = "True if a newer AMI is available than the one currently pinned"
+  value       = var.ami_id != data.aws_ami.ubuntu_latest.id
 }
