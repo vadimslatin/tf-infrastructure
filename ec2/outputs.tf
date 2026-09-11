@@ -3,14 +3,14 @@ output "instance_id" {
   value       = aws_instance.practice_ec2.id
 }
 
-output "public_ip" {
-  description = "Public IP address of the EC2 instance"
-  value       = aws_instance.practice_ec2.public_ip
+output "public_url" {
+  description = "Public URL"
+  value       = "http://${aws_instance.practice_ec2.public_ip}"
 }
 
 output "ssh_connection_command" {
   description = "Command to SSH into the instance"
-  value       = "ssh -i <path-to-your-key>.pem ubuntu@${aws_instance.practice_ec2.public_ip}"
+  value       = "ssh -i tf-practice-key.pem ubuntu@${aws_instance.practice_ec2.public_ip}"
 }
 
 output "pinned_ami_id" {

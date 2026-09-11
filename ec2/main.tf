@@ -43,14 +43,9 @@ resource "aws_instance" "practice_ec2" {
     volume_type = "gp3"
   }
 
-  user_data = <<-EOT
-              #!/bin/bash
-              apt-get update -y
-              apt-get install -y nginx
-              systemctl enable nginx
-              systemctl start nginx
-              echo "Hello from Terraform practice instance" > /var/www/html/index.html
-              EOT
+  user_data = templatefile("${path.module}/templates/user_data.sh.tpl", {
+    project_name = var.project_name
+  })
 
   tags = {
     Name    = "${var.project_name}-instance"
