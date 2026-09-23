@@ -1,4 +1,8 @@
 #!/bin/bash
+set -euo pipefail
+
+export DEBIAN_FRONTEND=noninteractive
+
 apt-get update -y
 apt-get install -y nginx
 
@@ -37,7 +41,7 @@ cat <<HTML > /var/www/html/index.html
     <div class="container">
         <h1>${project_name}</h1>
         <p>Hello from Terraform practice instance!</p>
-        
+
         <div class="info-item">
             <span class="label">Instance ID:</span> $INSTANCE_ID
         </div>

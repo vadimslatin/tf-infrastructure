@@ -1,0 +1,4 @@
+aws_region             = "eu-central-1"
+bucket_name            = "tf-practice-data-<account-id>"
+project_name           = "terraform-practice"
+object_expiration_days = 10

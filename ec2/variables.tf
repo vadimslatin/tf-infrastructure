@@ -21,9 +21,8 @@ variable "key_pair_name" {
 }
 
 variable "allowed_ssh_cidr" {
-  description = "CIDR block allowed to SSH into the instance"
+  description = "CIDR block allowed to SSH into the instance (e.g. your IP as x.x.x.x/32)"
   type        = string
-  default     = "0.0.0.0/0"
 }
 
 variable "project_name" {

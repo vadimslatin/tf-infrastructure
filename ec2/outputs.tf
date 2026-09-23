@@ -10,7 +10,7 @@ output "public_url" {
 
 output "ssh_connection_command" {
   description = "Command to SSH into the instance"
-  value       = "ssh -i tf-practice-key.pem ubuntu@${aws_instance.practice_ec2.public_ip}"
+  value       = "ssh -i ${var.key_pair_name}.pem ubuntu@${aws_instance.practice_ec2.public_ip}"
 }
 
 output "pinned_ami_id" {

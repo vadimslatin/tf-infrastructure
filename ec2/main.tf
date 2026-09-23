@@ -1,6 +1,7 @@
 resource "aws_security_group" "practice_sg" {
   name        = "${var.project_name}-sg"
   description = "Allow SSH and HTTP for practice instance"
+  vpc_id      = data.aws_vpc.default.id
 
   ingress {
     description = "SSH"

@@ -1,5 +1,6 @@
 aws_region       = "eu-central-1"
-instance_type    = "t2.micro"
-key_pair_name    = "my-key-pair"
-allowed_ssh_cidr = "203.0.113.0/32" # Change to your IP: curl ifconfig.me
+instance_type    = "t3.small"
+ami_id           = "ami-xxxxxxxxxxxxxxxxx" # pin explicitly; compare with output latest_available_ami_id
+key_pair_name    = "tf-practice-key"       # local file expected as <key_pair_name>.pem
+allowed_ssh_cidr = "203.0.113.0/32"        # your IP: curl -4 ifconfig.me
 project_name     = "terraform-practice"
